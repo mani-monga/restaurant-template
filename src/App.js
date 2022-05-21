@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Card from './components/Card'
+import Carosel from './components/Carosel'
+import Navbar from './components/Navbar'
+import data from './components/menu'
+import { useState } from 'react';
 
-function App() {
+const uniquelist =[ ...new Set(data.map((currEle)=>{
+return currEle.category;
+})),"All"
+];
+
+console.log(uniquelist);
+
+const App = () => { 
+  const [menu, setmenu] = useState(data);
+  const [menuList, setmenuList] = useState(uniquelist)
+
+
+  const filteritem = (category) => {
+    if(category === "All"){
+      setmenu(data);
+      return;
+    }
+    const updated = data.filter((curElem)=>{
+      return curElem.category === category ;
+    });
+    setmenu(updated);
+  };   
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Navbar filteritem = {filteritem} menuList = {menuList}/>
+      <Carosel/>
+      <div className="list">
+        <Card menuData={menu} />
+      </div>
+      {/* <Hooks/> */}
+    </>
+  )
 }
 
-export default App;
+export default App

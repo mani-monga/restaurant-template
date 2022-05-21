@@ -1,5 +1,6 @@
 {
-  "name": "hello",
+  "name": "restaurant-web-template",
+  "homepage": "https://mani-monga.github.io/restaurant-template/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
